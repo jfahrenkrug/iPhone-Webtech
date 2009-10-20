@@ -1,0 +1,34 @@
+# tabbar based app "ViewControllerDemo"
+# WebDemo, DataController und Resources reinkopieren
+# FirstViewController loeschen
+# neuen TableViewController WebDemosTableViewController anlegen
+# MainMenu.xib aufmachen
+# TabBar Controller aufklappen und den FirstViewController rausloeschen
+# Dann als erstes Item einen NavigationController reinziehen und dessen Controller Identitaet auf WebDemosTableViewController setzen
+# Navigation Item Title auf "Web Demos" setzen
+# import DataController in WebDemosTableViewController
+
+    // Customize the number of rows in the table view.
+    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+        return [[DataController sharedInstance] numberOfWebDemos];
+    }
+
+    // Customize the appearance of table view cells.
+    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+        static NSString *CellIdentifier = @"Cell";
+    
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+    
+    	// Configure the cell.
+    	cell.textLabel.text = [[[DataController sharedInstance] webDemoAtIndex:indexPath.row] name];
+
+        return cell;
+    }
+
+
+# laufen lassen
+
