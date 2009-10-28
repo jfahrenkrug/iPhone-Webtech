@@ -1,11 +1,18 @@
 # tabbar based app "ViewControllerDemo"
-# WebDemo, DataController und Resources reinkopieren
+# WebDemo, DataController, WebDemosSimpleTableViewController und Resources reinkopieren
 # FirstViewController loeschen
+# SecondView.xib loeschen
 # neuen TableViewController WebDemosTableViewController anlegen
 # MainMenu.xib aufmachen
 # TabBar Controller aufklappen und den FirstViewController rausloeschen
 # Dann als erstes Item einen NavigationController reinziehen und dessen Controller Identitaet auf WebDemosTableViewController setzen
 # Navigation Item Title auf "Web Demos" setzen
+# Dem ersten Tabbar Item den Titel "Deluxe" und das picture frame icon zuweisen.
+# den zweiten viewcontroller loeschen
+# dafuer einen weiteren navigationviewcontroller reinziehen, viewcontroller class auf WebDemosSimpleTableViewController setzen
+# aufklappen, nav item titel auch "web demos"
+# Dem zweiten tabbar Item den Titel "Simple" und das text justify icon zuweisen.
+
 # import DataController in WebDemosTableViewController
 
     // Customize the number of rows in the table view.
@@ -15,20 +22,82 @@
 
     // Customize the appearance of table view cells.
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-        static NSString *CellIdentifier = @"Cell";
-    
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        }
-    
-    	// Configure the cell.
-    	cell.textLabel.text = [[[DataController sharedInstance] webDemoAtIndex:indexPath.row] name];
 
-        return cell;
+    	static NSString *CellIdentifier = @"Cell";
+    	WebDemo *webDemo = [[DataController sharedInstance] webDemoAtIndex:indexPath.row];
+
+    	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    	if (cell == nil) {
+    		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    	}
+
+    	// Configure the cell.
+
+    	cell.textLabel.text = webDemo.name;
+
+    	return cell;
     }
 
 
 # laufen lassen
 
+# image hinzufuegen:
+cell.imageView.image = [UIImage imageNamed:webDemo.imageFileName];
+
+# laufen lassen
+
+# image ist etwas klein: groesser machen
+viewDidLoad
+self.tableView.rowHeight = 100;
+
+/*
+
+CGRect titleRect = CGRectMake(0, 0, 300, 40);
+    UILabel *tableTitle = [[UILabel alloc] initWithFrame:titleRect];
+    tableTitle.textColor = [UIColor blueColor];
+    tableTitle.backgroundColor = [self.tableView backgroundColor];
+    tableTitle.opaque = YES;
+    tableTitle.font = [UIFont boldSystemFontOfSize:18];
+    tableTitle.text = [curTrail objectForKey:@"Name"];
+    self.tableView.tableHeaderView = tableTitle;
+    [self.tableView reloadData];
+    [tableTitle release];
+*/
+
+# laufen lassen
+
+# beschreibung waere schoen. also cellForRowAtIndexPath -> initWithStyle:UITableViewCellStyleSubtitle und cell.detailTextLabel.text = [webDemo description];
+
+# user zeigen, dass man auf die zellen tippen kann:
+in (cell == nil)
+cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
+
+# laufen lassen
+
+# Wie fangen wir ab, dass getippt wurde und worauf getippt wurde?
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	WebDemo *webDemo = [[DataController sharedInstance] webDemoAtIndex:indexPath.row];
+	NSLog(@"Ausgewaehlt: %@", webDemo.name);
+}
+
+xxxx
+
+# File -> New -> New UIViewController with XIB ('WebDemoDisplayViewController')
+# WebDemoDisplayViewController -> WebDemoDisplayView.xib
+# WebDemoDisplayView.xib oeffnen, navbar + tabbar + uiwebview (+ iboutlet und connections)
+
+# in WebDemosTableViewController #import "WebDemoDisplayViewController.h"
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	WebDemo *webDemo = [[DataController sharedInstance] webDemoAtIndex:indexPath.row];
+	NSLog(@"Ausgewaehlt: %@", webDemo.name);
+
+	WebDemoDisplayViewController *displayViewController = [[WebDemoDisplayViewController alloc] initWithWebDemo:webDemo];
+	[self.navigationController pushViewController:displayViewController animated:YES];
+	[displayViewController release];
+}
+
+
+
+4:40  - datasource
