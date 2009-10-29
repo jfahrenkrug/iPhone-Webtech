@@ -98,6 +98,72 @@ xxxx
 	[displayViewController release];
 }
 
+# laufen lassen
+
+# waere schoen, im titel zu sehen, wie das demo heisst. Also: in initWithWebDemo: self.title = webDemo.name;
+
+# laufen lassen
+
+# waere schoen, sich den sourcecode ansehen zu koennen, also File -> New -> New UIViewController with XIB ('WebDemoSourceViewController')
+# WebDemoSourceViewController -> WebDemoSourceView.xib
+# WebDemoSourceView.xib oeffnen, navbar + tabbar + uitextview (+ iboutlet und connections)
+# textview -> non-editable
+# im grunde inhalt vom displayview kopieren
+
+# wie zeigen wir dem user jetzt, dass er entweder das gerenderte html oder den source sehen kann?
+# im tableviewcontroller #import "WebDemoSourceViewController.h"
+# cellForRowAtIndexPath: cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+
+und
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+	WebDemo *webDemo = [[DataController sharedInstance] webDemoAtIndex:indexPath.row];
+	
+	WebDemoSourceViewController *sourceViewController = [[WebDemoSourceViewController alloc] initWithWebDemo:webDemo];
+	[self.navigationController pushViewController:sourceViewController animated:YES];
+	[sourceViewController release];
+}
+
+# autorotation? in allen 4 view controllern:
+
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return YES;
+}
+
+# laufen lassen
+
+# source view direkt vom webview
+#import "WebDemoSourceViewController.h"
+
+in viewDidLoad:
+self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
+																							target:self action:@selector(showSource)] autorelease];
+	
+- (void)showSource {
+	WebDemoSourceViewController *sourceController = [[WebDemoSourceViewController alloc] initWithWebDemo:webDemo];
+	UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:sourceController];
+
+	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
+	sourceController.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply
+																								  target:sourceController action:@selector(dismissModalViewControllerAnimated:)] autorelease];
+
+	[self presentModalViewController: controller animated: YES];
+
+
+	[controller release];
+	[sourceController release];
+}
+
+# laufen lassen
+
+
+
+
+
 
 
 4:40  - datasource
+39:00 - autorotation wichtig!
