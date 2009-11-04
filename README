@@ -124,6 +124,59 @@ und
 	[sourceViewController release];
 }
 
+# laufen lassen
+
+# jetzt waere es doch schoen, die tabellen eintraege nach typ zu gruppieren (canvas/css)
+# in WebDemosTableViewController:
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (section == 0) {
+		return [[DataController sharedInstance] numberOfCssWebDemos];
+	} else {
+		return [[DataController sharedInstance] numberOfCanvasWebDemos];
+	}
+}
+
+@interface WebDemosTableViewController(PrivateMethods)
+- (Webdemo *)webDemoForIndexPath:(NSIndexPath *)indexPath;
+@end
+
+- (WebDemo *)webDemoForIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 0) {
+		return [[DataController sharedInstance] cssWebDemoAtIndex:indexPath.row];
+	} else {
+		return [[DataController sharedInstance] canvasWebDemoAtIndex:indexPath.row];
+	}
+}
+
+//ueber all webDemo = mit dem hier ersetzen:
+WebDemo *webDemo = [self webDemoForIndexPath:indexPath];
+
+# laufen lassen (hmmm, kein veraenderung!)
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if (section == 0) {
+		return @"CSS Transformations";
+	} else {
+		return @"Canvas";
+	}
+}
+
+# laufen lassen
+
+# sektionen deutlicher trennen?
+
+MainMenu.xib oeffnen, einen TableView unter den TableViewController ziehen und delegate und datasource verbinden und style auf grouped setzen
+
+# laufen lassen
+
+# wieder auf plain setzen
+
+
 # autorotation? in allen 4 view controllern:
 
 // Override to allow orientations other than the default portrait orientation.
