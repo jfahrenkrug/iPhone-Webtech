@@ -1,0 +1,53 @@
+# Tabbar based app "ViewControllerDemo"
+# Inhalt von demo-files reinkopieren (source in Classes, Bilder in Resources)
+# Laufen lassen
+# FirstViewController loeschen
+# SecondView.xib loeschen
+# neuen TableViewController WebDemosTableViewController anlegen
+# MainMenu.xib aufmachen
+# TabBar Controller aufklappen und den FirstViewController rausloeschen
+# Dann als erstes Item einen NavigationController reinziehen und dessen RootViewController Identitaet auf WebDemosTableViewController setzen
+# Navigation Item Title auf "Web Demos" setzen
+# Dem ersten Tabbar Item den Titel "Deluxe" und das picture frame icon zuweisen.
+# Den zweiten ViewController loeschen
+# Dafuer einen weiteren NavigationViewController reinziehen, RootViewController Class auf WebDemosSimpleTableViewController setzen
+# Aufklappen, und NavigationItem Titel auch auf "Web Demos" setzen
+# Dem zweiten Tabbar Item den Titel "Simple" und das text justify icon zuweisen.
+
+# Laufen lassen
+
+# Schritte 1-3 in WebDemosTableViewController einfügen
+
+# Laufen lassen
+
+# image hinzufuegen (Step 4)
+
+# laufen lassen
+
+# image ist etwas klein: groesser machen (in viewDidLoad, Step 5)
+
+# laufen lassen
+
+# beschreibung waere schoen. Also in cellForRowAtIndexPath Step 6 & 7 einfuegen.
+
+# laufen lassen
+
+# user zeigen, dass man auf die zellen tippen kann: in (cell == nil) Step 8 einfuegen
+
+# laufen lassen
+
+# Wie fangen wir ab, dass und worauf getippt wurde? Step 9 (in didSelectRowAtIndexPath)
+
+# laufen lassen (und log zeigen)
+
+# Jetzt wollen wir das WebDemo natuerlich auch anzeigen.
+# File -> New -> New UIViewController with XIB ('WebDemoDisplayViewController')
+# WebDemoDisplayViewController -> WebDemoDisplayView.xib
+# Inhalt von WebDemoDisplayViewController.h mit Step 10 ersetzen
+# Step 11 & 12 in WebDemoDisplayViewController.m einfuegen
+
+# WebDemoDisplayView.xib oeffnen, navbar + tabbar + uiwebview (webview iboutlet verbinden)
+
+# in WebDemosTableViewController Step 13 & 14 einfuegen.
+
+# laufen lassen
