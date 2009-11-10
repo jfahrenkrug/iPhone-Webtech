@@ -45,9 +45,61 @@
 # WebDemoDisplayViewController -> WebDemoDisplayView.xib
 # Inhalt von WebDemoDisplayViewController.h mit Step 10 ersetzen
 # Step 11 & 12 in WebDemoDisplayViewController.m einfuegen
+# Und: [webDemo release]; in dealloc!
 
 # WebDemoDisplayView.xib oeffnen, navbar + tabbar + uiwebview (webview iboutlet verbinden)
 
 # in WebDemosTableViewController Step 13 & 14 einfuegen.
 
+# Entsprechende Stellen im WebDemoSimpleTableViewController einkommentieren (import und didSelectRowAtIndexPath)
+
 # laufen lassen
+
+# waere schoen, im titel zu sehen, wie das demo heisst. Also: in WebDemoDisplayViewController in initWithWebDemo: self.title = webDemo.name;
+
+# laufen lassen
+
+# waere schoen, sich den sourcecode ansehen zu koennen (schon vorbereitet)
+
+# wie zeigen wir dem user jetzt, dass er entweder das gerenderte html oder den source sehen kann?
+# im tableviewcontroller #import Step 15
+# cellForRowAtIndexPath: cell.accessoryType mit Step 16 austauschen.
+# Step 17 einfuegen (im WebDemosTableViewController)
+
+# laufen lassen (Am Ende: drauf achten: verschiedene Typen: CSS/Canvas)
+
+# jetzt waere es doch schoen, die tabellen eintraege nach typ zu gruppieren (canvas/css)
+# in WebDemosTableViewController:
+
+# numberOfSectionsInTableView: return 2;
+# Inhalt von numberOfRowsInSection mit Step 18 ersetzen
+# Hilfsmethode, um fuer die Kombination aus Sektion und Zeile das richtige WebDemo Objekt zu finden (Steps 19 & 20)
+# ueberall webDemo = mit Step 21 ersetzen.
+
+# laufen lassen (hmmm, kein veraenderung!)
+
+# Wir haben eine DataSource Method vergessen: titleForHeaderInSection!
+# Step 22 einfuegen.
+
+# laufen lassen
+
+# sektionen deutlicher trennen?
+
+# MainMenu.xib oeffnen
+# einen TableView unter den TableViewController ziehen und delegate und datasource verbinden 
+# TableView style auf grouped setzen
+
+# laufen lassen und gleich demonstrieren, dass autorotation nicht geht.
+
+# wieder zurueck auf Plain setzen
+
+# autorotation? in allen 4 view controllern muss shouldAutorotateToInterfaceOrientation YES zurueckgeben.
+
+# laufen lassen
+
+# Den Source View direkt vom webview anzeigen
+# In WebDemoDisplayViewController Steps 23 - 25 einfuegen.
+
+# laufen lassen
+# Fertig
+
